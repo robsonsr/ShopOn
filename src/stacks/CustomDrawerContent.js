@@ -13,6 +13,7 @@ import {
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 
 const CustomDrawerContent = (props) => {
   const {
@@ -24,7 +25,7 @@ const CustomDrawerContent = (props) => {
       <TouchableOpacity
         style={[styles.itemMenu]}
         onPress={() => {
-          navigation.navigate('DestaquesStack');;
+          navigation.navigate('DestaquesStack');
         }}>
         {index === 0 ? (
           <Image source={require('../assets/img/destaquesIconActive.png')} />
@@ -43,10 +44,10 @@ const CustomDrawerContent = (props) => {
       <TouchableOpacity
         style={[styles.itemMenu]}
         onPress={() => {
-          navigation.navigate('DepartamentoStack');;
+          navigation.navigate('ProductDetailsStack');
         }}>
-        <MaterialCommunityIcons
-          name="format-list-bulleted-square"
+        <FontAwesomeIcons
+          name="qrcode"
           size={25}
           style={[
             styles.itemMenuIcon,
@@ -58,14 +59,14 @@ const CustomDrawerContent = (props) => {
             styles.itemMenuLabel,
             index === 1 && styles.itemMenuLabelActive,
           ]}>
-          departamentos
+          QrCode
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.itemMenu]}
         onPress={() => {
-          navigation.navigate('DepartamentoStack');;
+          navigation.navigate('ProductDetailsStack');
         }}>
         <MaterialCommunityIcons
           name="cards-heart"
@@ -87,9 +88,7 @@ const CustomDrawerContent = (props) => {
   );
 };
 
-
 export default CustomDrawerContent;
-
 
 const styles = StyleSheet.create({
   itemMenu: {

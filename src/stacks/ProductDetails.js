@@ -2,18 +2,17 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import QRcodeScreen from '../screens/QRcodeScreen';
-import DepartamentoScreen from '../screens/DepartamentoScreen';
+import ProductDetails from '../screens/ProductDetails';
 
 const Stack = createStackNavigator();
-const DepartamentosStack = () => {
+const ProductDetailsStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="DepartamentoScreen" component={DepartamentoScreen} />
+      <Stack.Screen name="ProductDetails" component={ProductDetails} />
       {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
         <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
     </Stack.Navigator>
   );
 };
 
-export default DepartamentosStack;
+export default ProductDetailsStack;

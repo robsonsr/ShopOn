@@ -23,7 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import DestaquesStack from './src/stacks/DestaquesStack';
-import DepartamentoStack from './src/stacks/DepartamentosStack';
+import ProductDetails from './src/stacks/ProductDetails';
 import InformationQRCodeStack from './src/stacks/InformationQRCodeStack';
 import CustomDrawerContent from './src/stacks/CustomDrawerContent';
 
@@ -40,8 +40,8 @@ const App = () => {
           openByDefault={false}>
           <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />
           <Drawer.Screen
-            name="DepartamentoStack"
-            component={DepartamentoStack}
+            name="ProductDetailsStack"
+            component={ProductDetails}
           />
         </Drawer.Navigator>
       </NavigationContainer>

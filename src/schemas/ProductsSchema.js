@@ -9,6 +9,7 @@ export default class ProductsSchema {
       },
       name: 'string',
       description: 'string',
+      code: 'string',
       category: 'string',
       image: 'string',
       price: 'float',

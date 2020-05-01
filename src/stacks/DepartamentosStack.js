@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import QRcodeScreen from '../screens/QRcodeScreen'
-import DepartamentoScreen from '../screens/DepartamentoScreen'
+import QRcodeScreen from '../screens/QRcodeScreen';
+import DepartamentoScreen from '../screens/DepartamentoScreen';
 
 const Stack = createStackNavigator();
 const DepartamentosStack = () => {
@@ -14,6 +14,6 @@ const DepartamentosStack = () => {
         <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
     </Stack.Navigator>
   );
-}
+};
 
 export default DepartamentosStack;

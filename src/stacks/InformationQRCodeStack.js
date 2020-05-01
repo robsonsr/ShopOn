@@ -9,8 +9,6 @@ const InformationQRCodeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="QRcodeScreen" component={QRcodeScreen} />
-      {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
-        <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
     </Stack.Navigator>
   );
 }

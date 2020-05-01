@@ -9,6 +9,12 @@ export default class ProductsSchema {
       },
       name: 'string',
       description: 'string',
+      category: 'string',
+      image: 'string',
+      price: 'float',
+      technical_information: 'string',
+      starts: 'int',
+      votes: 'int',
     },
   };
 }

@@ -7,13 +7,13 @@ import DepartamentoScreen from '../screens/DepartamentoScreen'
 
 const Stack = createStackNavigator();
 const DepartamentosStack = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="DepartamentoScreen" component={DepartamentoScreen} />
-            {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="DepartamentoScreen" component={DepartamentoScreen} />
+      {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
         <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
-        </Stack.Navigator>
-    );
+    </Stack.Navigator>
+  );
 }
 
 export default DepartamentosStack;

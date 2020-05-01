@@ -16,36 +16,37 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DestaquesStack from './src/stacks/DestaquesStack'
-import DepartamentoStack from './src/stacks/DepartamentosStack'
-import InformationQRCodeStack from './src/stacks/InformationQRCodeStack'
-import CustomDrawerContent from './src/stacks/CustomDrawerContent'
+import DestaquesStack from './src/stacks/DestaquesStack';
+import DepartamentoStack from './src/stacks/DepartamentosStack';
+import InformationQRCodeStack from './src/stacks/InformationQRCodeStack';
+import CustomDrawerContent from './src/stacks/CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <>
-      <StatusBar backgroundColor={"#A71414"} />
+      <StatusBar backgroundColor={'#A71414'} />
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="HomeScreen" drawerContent={(props) => <CustomDrawerContent {...props} />}
-          openByDefault={false}
-        >
+        <Drawer.Navigator
+          initialRouteName="HomeScreen"
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+          openByDefault={false}>
           <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />
-          <Drawer.Screen name="DepartamentoStack" component={DepartamentoStack} />
+          <Drawer.Screen
+            name="DepartamentoStack"
+            component={DepartamentoStack}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </>
   );
 };
-
-
-
 
 export default App;

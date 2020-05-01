@@ -6,13 +6,13 @@ import QRcodeScreen from '../screens/QRcodeScreen'
 
 const Stack = createStackNavigator();
 const InformationQRCodeStack = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="QRcodeScreen" component={QRcodeScreen} />
-            {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="QRcodeScreen" component={QRcodeScreen} />
+      {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
         <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
-        </Stack.Navigator>
-    );
+    </Stack.Navigator>
+  );
 }
 
 export default InformationQRCodeStack;

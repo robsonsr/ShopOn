@@ -1,0 +1,19 @@
+#Usando realm
+
+import getRealm from '../services/realm'
+
+const realm = await getRealm();
+realm.write(() => {
+  realm.create('Products', {id: 1, name: '...', description: 'asdasda asdasdasd'}); //cria o objeto no banco(linha)
+});
+
+useEffect(() => {
+  const loadProducts = async() => {
+    const realm = await getRealm();
+    const data = realm.objects('Products').sorted('name', true);// list products by name
+  }
+  loadProducts();
+}, [])
+
+#Lista de filtros(sort, like, CONTAINS[c], ...)
+https://realm.io/docs/javascript/latest/#queries

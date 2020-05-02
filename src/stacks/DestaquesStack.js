@@ -3,7 +3,14 @@ import { View, Image, TouchableOpacity } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
+import DestaquesScreen from '../screens/DestaquesScreen';
+import ModoLojaHomeScreen from '../screens/ModoLojaHomeScreen'
+
+// TELAS DETALHES PRODUTOS
+import ProductDetails from '../screens/ProductDetails'
+
+// TELAS LISTA DE COMPRAS
+import CarrinhoScreen from '../screens/CarrinhoScreen'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -22,8 +29,8 @@ const AppStack = ({ navigation }) => {
     <Stack.Navigator
       screenOptions={defaultScreenOptions}>
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="DestaquesScreen"
+        component={DestaquesScreen}
         options={{
           headerTitle: (props) => {
             return (
@@ -39,8 +46,29 @@ const AppStack = ({ navigation }) => {
             );
           }
         }} />
-      {/* <Stack.Screen name="HomeScreen" component={OTHER} />
-            <Stack.Screen name="HomeScreen" component={OTHER} /> */}
+      <Stack.Screen
+        name="ModoLojaHomeScreen"
+        component={ModoLojaHomeScreen}
+        options={{
+          headerTitle: "modo loja"
+        }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{
+          headerTitle: "consulta por QR Code"
+        }} />
+      <Stack.Screen
+        name="CarrinhoScreen"
+        component={CarrinhoScreen}
+        options={{
+          headerTitle: "carrinho",
+          headerRight: false
+        }} />
+
+
+
     </Stack.Navigator>
   );
 };

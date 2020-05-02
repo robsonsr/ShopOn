@@ -7,16 +7,17 @@ import {
     Image
 } from 'react-native';
 
-const compre_receba_hoje = require("../assets/img/destaques/compre_receba_hoje.png")
-const venda_com_a_gente = require("../assets/img/destaques/venda_com_a_gente.png")
-const auxilio_emergencial = require("../assets/img/destaques/auxilio_emergencial.png")
-const comercio_local = require("../assets/img/destaques/comercio_local.png")
-const dia_maes = require("../assets/img/destaques/dia_maes.png")
-const dia_maes_anuncio = require("../assets/img/destaques/dia_maes_anuncio.png")
+const compre_receba_hoje = require("../../assets/img/destaques/compre_receba_hoje.png")
+const venda_com_a_gente = require("../../assets/img/destaques/venda_com_a_gente.png")
+const auxilio_emergencial = require("../../assets/img/destaques/auxilio_emergencial.png")
+const comercio_local = require("../../assets/img/destaques/comercio_local.png")
+const dia_maes = require("../../assets/img/destaques/dia_maes.png")
+const dia_maes_anuncio = require("../../assets/img/destaques/dia_maes_anuncio.png")
 
-const covid = require("../assets/img/destaques/covid.png")
+const covid = require("../../assets/img/destaques/covid.png")
 
-const HomeScreen = (props) => {
+const DestaquesScreen = ({ navigation }) => {
+    const { navigate } = navigation;
     return (
         <View
             style={{
@@ -30,6 +31,7 @@ const HomeScreen = (props) => {
                 }}
             >
                 <DestaqueButton
+                    onPress={() => navigate("ModoLojaHomeScreen")}
                     imageSource={""}
                     label={"shop on"} />
                 <DestaqueButton
@@ -82,11 +84,12 @@ const HomeScreen = (props) => {
         </View>
     );
 };
-export default HomeScreen;
+export default DestaquesScreen;
 
-const DestaqueButton = ({ imageSource, label }) => {
+const DestaqueButton = ({ imageSource, label, onPress }) => {
     return (
         <TouchableOpacity
+            onPress={onPress}
             style={{
                 maxWidth: 70,
                 margin: 10

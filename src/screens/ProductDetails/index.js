@@ -46,7 +46,7 @@ const ProductDetails = (props) => {
       <DetailsProduct>
         <NameProduct>{product.name}</NameProduct>
         <NameProduct>{product.description}</NameProduct>
-        <PriceProduct>{product?.price.toFixed(2)}</PriceProduct>
+        <PriceProduct>{product?.price?.toFixed(2)}</PriceProduct>
       </DetailsProduct>
     </Container>
   ) : (

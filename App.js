@@ -35,7 +35,12 @@ const App = () => {
       <StatusBar backgroundColor={'#A71414'} />
       <NavigationContainer>
         <Drawer.Navigator
-          initialRouteName="HomeScreen"
+          // drawerContentOptions={{
+          //   itemStyle: {
+          //     marginVertical: 10
+          //   }
+          // }}
+          initialRouteName="DestaquesStack"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
           openByDefault={false}>
           <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />

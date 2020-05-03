@@ -32,7 +32,7 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   return (
     <>
-      <StatusBar backgroundColor={'#A71414'} />
+      <StatusBar backgroundColor="#A71414" />
       <NavigationContainer>
         <Drawer.Navigator
           // drawerContentOptions={{
@@ -42,7 +42,8 @@ const App = () => {
           // }}
           initialRouteName="DestaquesStack"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
-          openByDefault={false}>
+          openByDefault={false}
+        >
           <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />
           <Drawer.Screen
             name="ProductDetailsStack"

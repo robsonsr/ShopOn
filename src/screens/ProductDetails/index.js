@@ -37,8 +37,8 @@ import {
   ToggleContainer,
 } from './styles';
 
-const ProductDetails = () => {
-  const [code, setCode] = useState('');
+const ProductDetails = ({ route }) => {
+  const [code, setCode] = useState(route.params?.category);
   const [recipe, setRecipe] = useState([
     '1- bata o leite condensado no liquidificador até ficar bem cremoso ',
     '2 - derreta duas barras de chocolate meio amargo com meia caixinha de creme de leite no micro ondas, de 30 em 30 segundo, mexendo bem',
@@ -254,6 +254,37 @@ const ProductDetails = () => {
     const productsCategoryByCode = realm.objects('Products').filtered(filter);
     setSuggestsProducts(productsByCategory);
     setUtilizedProducts(productsCategoryByCode);
+
+    let url = '';
+    switch (code) {
+      case 'comida':
+        url = 'https://img.youtube.com/vi/QnzFZc9f4R4/default.jpg'
+        break;
+      case 'cama':
+        url = 'https://images-americanas.b2w.io/produtos/01/00/img/134318/2/134318217_1GG.jpg'
+        break;
+      case 'smarttv':
+        url = 'https://i.pinimg.com/originals/40/fa/c6/40fac6c50a38a3e5ba12f8a675ca33ad.jpg'
+        break;
+      default:
+        url = '';
+    }
+
+    const lastIndex = realm.objects('Historical').max('id')
+
+    productsByCategory.length && !route.params?.category && realm.write(() => {
+      realm.create(
+        'Historical',
+        {
+          id: lastIndex + 1,
+          category: code,
+          url: url,
+          title: 'Receita Pave de chocolate',
+          date: new Date().toISOString(),
+        },
+        'modified',
+      );
+    });
   };
 
   useEffect(() => {
@@ -261,7 +292,7 @@ const ProductDetails = () => {
     code !== '' && recoverProductDetails();
   }, [code]);
 
-  return code.length > 0 ? (
+  return code ? (
     <Container>
       {code === 'comida' && (
         <>
@@ -301,8 +332,7 @@ const ProductDetails = () => {
                     color: '#E60014',
                     fontWeight: 'bold',
                     paddingTop: 10,
-                  }}
-                >
+                  }}>
                   Essa receita serve até 6 porções
                 </TitleRecipe>
               </ContentRecipe>
@@ -516,7 +546,8 @@ const ProductDetails = () => {
 
       <ToggleContainer>
         <RowToggle
-          onPress={() => setShowUtilizedProducts(!showUtilizedProducts)}>
+          onPress={() => setShowUtilizedProducts(!showUtilizedProducts)}
+        >
           <SubTitle>produtos usados</SubTitle>
           <Icon
             name={showUtilizedProducts ? 'angle-down' : 'angle-up'}

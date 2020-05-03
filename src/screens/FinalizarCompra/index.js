@@ -17,6 +17,8 @@ import {
   ContentText,
   TextFree,
   Divider,
+  ButtonFinish,
+  ButtonFinishText,
 } from './styles';
 
 const FinalizarCompra = () => {
@@ -99,6 +101,9 @@ const FinalizarCompra = () => {
         / CNPJ: 00.776.574/006-60 / Inscrição Estadual: 492.513.778.117 /
         Endereço Rua Sacadura Cabral, 102 - Rio de Janeiro, RJ - 20081-902
       </TextFree>
+      <ButtonFinish>
+        <ButtonFinishText>finalizar compra</ButtonFinishText>
+      </ButtonFinish>
     </Container>
   );
 };

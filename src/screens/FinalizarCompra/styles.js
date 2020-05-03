@@ -78,3 +78,19 @@ export const TextFree = styled.Text`
   font-size: 12px;
   color: #666666;
 `;
+
+export const ButtonFinish = styled.TouchableOpacity`
+  width: 90%;
+  height: 44px;
+  margin: 20px 0;
+  align-self: center;
+  background: #e60014;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ButtonFinishText = styled.Text`
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+`;

@@ -18,7 +18,6 @@ const historic = <Ionicons name="md-paper" size={50} color="#F51E1E" />;
 
 const ModoLojaHomeScreen = ({ navigation }) => {
   const { navigate } = navigation;
-  navigate('FinalizarCompra');
   return (
     <>
       <View

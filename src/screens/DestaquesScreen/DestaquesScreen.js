@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, } from 'react';
 import {
     View,
     Text,
@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
+
 
 const compre_receba_hoje = require("../../assets/img/destaques/compre_receba_hoje.png")
 const venda_com_a_gente = require("../../assets/img/destaques/venda_com_a_gente.png")
@@ -16,7 +17,10 @@ const dia_maes_anuncio = require("../../assets/img/destaques/dia_maes_anuncio.pn
 
 const covid = require("../../assets/img/destaques/covid.png")
 
+
+
 const DestaquesScreen = ({ navigation }) => {
+
     const { navigate } = navigation;
     return (
         <View

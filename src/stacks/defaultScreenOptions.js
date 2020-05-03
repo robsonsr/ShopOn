@@ -1,13 +1,19 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import {
+    View,
+    Image,
+    TouchableOpacity,
+    Text
+} from 'react-native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-
-const menu = <MaterialCommunityIcons name="menu" size={25} color="#fff" />;
+const menu = <MaterialCommunityIcons name="menu" size={25} color="#fff" />
 const searchIcon = <MaterialIcons name="search" size={25} color="#fff" />
 const shoppingBasketIcon = <Fontisto name="shopping-basket" size={20} color="#fff" />
+
+const backIcon = <MaterialIcons name="arrow-back" size={25} color="#fff" />
 
 const screenOptions = ({ route, navigation }) => {
     return ({
@@ -46,22 +52,35 @@ const screenOptions = ({ route, navigation }) => {
                 </TouchableOpacity>
             </View >
         },
-        // headerTitle: false,
-        headerLeft: (props) => {
-            console.log("aaa", navigation)
+        headerBackImage: () => {
             return (
                 <View
                     style={{
-                        paddingHorizontal: 20,
-                        flexDirection: 'row',
-                        alignItems: 'center',
+                        height: 30,
+                        width: 30,
+                        justifyContent: "center",
+                        alignItems: "center"
                     }}>
-                    <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-                        {menu}
-                    </TouchableOpacity>
+                    {backIcon}
                 </View>
-            );
+            )
         }
+        // headerTitle: false,
+        // headerLeft: (props) => {
+        //     console.log("aaa", navigation)
+        //     return (
+        //         <View
+        //             style={{
+        //                 paddingHorizontal: 20,
+        //                 flexDirection: 'row',
+        //                 alignItems: 'center',
+        //             }}>
+        //             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+        //                 {menu}
+        //             </TouchableOpacity>
+        //         </View>
+        //     );
+        // }
     })
 }
 export default screenOptions;

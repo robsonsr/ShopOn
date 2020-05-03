@@ -32,6 +32,20 @@ const AppStack = ({ navigation }) => {
         name="DestaquesScreen"
         component={DestaquesScreen}
         options={{
+          headerLeft: (props) => {
+            return (
+              <View
+                style={{
+                  paddingHorizontal: 20,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+                  {menu}
+                </TouchableOpacity>
+              </View>
+            );
+          },
           headerTitle: (props) => {
             return (
               <View
@@ -66,8 +80,6 @@ const AppStack = ({ navigation }) => {
           headerTitle: "carrinho",
           headerRight: false
         }} />
-
-
 
     </Stack.Navigator>
   );

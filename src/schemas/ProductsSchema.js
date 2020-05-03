@@ -16,21 +16,22 @@ export default class ProductsSchema {
       technical_information: 'string',
       starts: 'int',
       votes: 'int',
+      code_bars: 'string',
     },
   };
 
-  get values() {
-    return {
-      id: this.id,
-      name: this.name,
-      description: this.description,
-      code: this.code,
-      category: this.category,
-      image_url: this.image_url,
-      price: this.price,
-      technical_information: this.technical_information,
-      starts: this.starts,
-      votes: this.votes,
-    };
-  }
+  // get values() {
+  //   return {
+  //     id: this.id,
+  //     name: this.name,
+  //     description: this.description,
+  //     code: this.code,
+  //     category: this.category,
+  //     image_url: this.image_url,
+  //     price: this.price,
+  //     technical_information: this.technical_information,
+  //     starts: this.starts,
+  //     votes: this.votes,
+  //   };
+  // }
 }

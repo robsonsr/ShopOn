@@ -48,7 +48,10 @@ const ModoLojaHomeScreen = ({ navigation }) => {
                             label={"consulte o produto com QR Code"}
                         />
                         <Button
-                            onPress={() => navigate("CarrinhoScreen")}
+                            onPress={() => {
+                                navigate("CarrinhoScreen")
+                                // navigate("ConsultaProdutoScreen")
+                            }}
                             icon={shoppingcart}
                             label={"monte o seu carrinho"}
                         />

@@ -15,7 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const backIcon = <MaterialIcons name="arrow-back" size={25} color="#fff" />
 
-const ReaderBarCode = ({ showCamera, closeCamera }) => {
+const ReaderBarCode = ({ showCamera, closeCamera, onCodeDetected }) => {
     return (
         <Modal
             animationIn={"fadeIn"}
@@ -72,7 +72,13 @@ const ReaderBarCode = ({ showCamera, closeCamera }) => {
                         buttonNegative: 'Cancel',
                     }}
                     onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                        console.log(barcodes);
+                        console.log(barcodes[0].type);
+                        if (barcodes[0].type === "EAN_13" || barcodes[0].type === "EAN_8") {
+                            console.log("foi");
+                            closeCamera();
+                            onCodeDetected(barcodes[0]);
+                        }
+
                     }}
                 />
                 <View

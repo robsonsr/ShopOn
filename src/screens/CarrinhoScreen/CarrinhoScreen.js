@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -30,9 +30,15 @@ const barCodeIcon = <MaterialCommunityIcons
     color={"#fff"}
 />
 
+const chevronDown = <MaterialCommunityIcons
+    name="chevron-down"
+    size={20}
+    color={"#666"}
+/>
+
 const CarrinhoScreen = ({ navigation }) => {
     const [showScanner, setShowScanner] = useState(false)
-
+    const [lista, setLista] = useState([]);
     const openCodeScanner = () => {
         setShowScanner(true);
     }
@@ -40,12 +46,24 @@ const CarrinhoScreen = ({ navigation }) => {
     const onCodeDetected = (barCode) => {
         navigation.navigate("ConsultaProdutoScreen")
     }
+
+    const removerItem = (item) => {
+        const newLista = lista.filter(({ codigo }) => {
+            return item.codigo != codigo;
+        })
+        setLista(newLista);
+    }
+
+    useEffect(() => {
+        setLista(dadosFakes);
+    }, [])
+
     return (
         <>
             <ReaderBarCode
                 showCamera={showScanner}
                 onCodeDetected={onCodeDetected}
-                closeCamera={() => { setShowScanner(false); }}
+                closeCamera={() => { setShowScanner(false) }}
             />
             <View
                 style={{
@@ -77,14 +95,15 @@ const CarrinhoScreen = ({ navigation }) => {
                     // paddingBottom: 60
                 }}>
                     <FlatList
-                        data={dadosFakes}
+                        data={lista}
                         renderItem={({ item, index }) => (
                             <View
                                 style={{
                                     flexDirection: "column",
                                     backgroundColor: "#fff",
-                                    marginBottom: (index === dadosFakes.length - 1) ? 90 : 10,
+                                    marginBottom: (index === lista.length - 1) ? 90 : 10,
                                     padding: 10,
+                                    // paddingBottom: (index === lista.length - 1) ? 90 : 10,
                                     alignItems: "center",
                                 }}>
                                 <View style={{
@@ -127,13 +146,49 @@ const CarrinhoScreen = ({ navigation }) => {
                                 </View>
                                 <View
                                     style={{
-                                        height: 30,
-                                        // backgroundColor: "blue",
                                         width: "100%",
                                         marginTop: 10,
-                                        paddingVertical: 10
+                                        paddingVertical: 10,
+                                        flexDirection: "row",
+                                        justifyContent: "space-between",
+                                        borderTopWidth: 1,
+                                        borderColor: "#EAEAEA"
                                     }}>
-                                    <Text>Oiii</Text>
+                                    <View style={{
+                                        backgroundColor: "#EAEAEA",
+                                        width: 60,
+                                        padding: 6,
+                                        flexDirection: "row",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: 4
+                                    }}>
+                                        <Text
+                                            style={{
+                                                borderRadius: 4,
+                                                color: "#666666"
+                                            }}>1 un.</Text>
+                                        {chevronDown}
+                                    </View>
+                                    <TouchableOpacity
+                                        onPress={() => {
+
+                                            removerItem(item)
+                                        }}
+                                        style={{
+                                            backgroundColor: "#fff",
+                                            borderWidth: 1,
+                                            borderRadius: 2,
+                                            borderColor: "#E60014",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <Text style={{
+                                            color: "#E60014",
+                                            padding: 10
+                                        }}>remover item</Text>
+                                    </TouchableOpacity>
+
                                 </View>
                             </View>
                         )}
@@ -203,52 +258,62 @@ const dadosFakes = [
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 1
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 2
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 3
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 4
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 5
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 6
     },
 
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 7
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 8
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 9
     },
     {
         titulo: "Samsung Galaxy Final",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
-        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg"
+        imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
+        codigo: 10
     }
 ]

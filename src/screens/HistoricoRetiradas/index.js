@@ -183,11 +183,11 @@ const HistoricoRetiradas = ({ navigation }) => {
                 {`R$ ${histo.price_total.toFixed(2)}`}
               </PriceTotalText>
               <CardMoreDetailsButton
-                onPress={() =>
+                onPress={() => {
                   navigation.navigate('HistoricoComprasDetalhe', {
                     details: { date: histo.date, number: histo.number },
-                  })
-                }
+                  });
+                }}
               >
                 <CardMoreDetailsButtonText>ver mais</CardMoreDetailsButtonText>
               </CardMoreDetailsButton>

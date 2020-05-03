@@ -6,15 +6,27 @@ import {
     StyleSheet
 } from 'react-native'
 
-const RedButtonComponent = ({ onPress, label }) => {
+const RedButtonComponent = ({ onPress, label, outline }) => {
 
     return (
 
         <TouchableOpacity
             onPress={onPress}
-            style={[styles.container]}>
+            style={[
+                styles.container,
+                outline && {
+                    backgroundColor: "#fff",
+                    borderColor: "#E60014",
+                    borderWidth: 1
+                }
+            ]}>
             <Text
-                style={[styles.label]}>{label}
+                style={[
+                    styles.label,
+                    outline && {
+                        color: "#E60014"
+                    }
+                ]}>{label}
             </Text>
         </TouchableOpacity>
     )
@@ -22,7 +34,7 @@ const RedButtonComponent = ({ onPress, label }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "red",
+        backgroundColor: "#E60014",
         borderRadius: 2,
         // elevation: 2,
         // height: 36,

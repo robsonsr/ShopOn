@@ -12,7 +12,7 @@ import ProductDetails from '../screens/ProductDetails'
 // TELAS LISTA DE COMPRAS
 import CarrinhoScreen from '../screens/CarrinhoScreen'
 import ConsultaProdutoScreen from '../screens/ConsultaProdutoScreen'
-
+import FinalizarCompraScreen from '../screens/FinalizarCompraScreen'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -87,6 +87,13 @@ const AppStack = ({ navigation }) => {
         component={ConsultaProdutoScreen}
         options={{
           headerTitle: "produto",
+          headerRight: false
+        }} />
+      <Stack.Screen
+        name="FinalizarCompraScreen"
+        component={FinalizarCompraScreen}
+        options={{
+          headerTitle: "finalizar compra",
           headerRight: false
         }} />
 

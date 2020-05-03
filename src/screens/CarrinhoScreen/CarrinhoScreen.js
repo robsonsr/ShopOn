@@ -101,7 +101,7 @@ const CarrinhoScreen = ({ navigation }) => {
                                 style={{
                                     flexDirection: "column",
                                     backgroundColor: "#fff",
-                                    marginBottom: (index === lista.length - 1) ? 90 : 10,
+                                    marginBottom: (index === lista.length - 1) ? 103 : 10,
                                     padding: 10,
                                     // paddingBottom: (index === lista.length - 1) ? 90 : 10,
                                     alignItems: "center",
@@ -142,6 +142,18 @@ const CarrinhoScreen = ({ navigation }) => {
                                             color: "#404040",
                                             // fontWeight: "bold"
                                         }}>{item.subtitulo}</Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            // backgroundColor: "red",
+                                            justifyContent: "flex-end"
+                                            // width: 20
+                                        }}>
+                                        <Text
+                                            style={{
+                                                fontSize: 14,
+                                                color: "#404040"
+                                            }}>R$ {item.valor}</Text>
                                     </View>
                                 </View>
                                 <View
@@ -202,11 +214,29 @@ const CarrinhoScreen = ({ navigation }) => {
                             width: "100%",
                             position: "absolute",
                             bottom: 0,
-                            // backgroundColor: "#fff",
+                            backgroundColor: "#fff",
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-                        <RedButtonComponent onPress={() => { }} label={"finalizar compra"} />
+                        <View
+                            style={{
+                                backgroundColor: "#fff",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                paddingVertical: 10,
+                                width: "100%"
+                            }}>
+                            <Text style={{ fontSize: 14, color: "#404040" }}>
+                                total do carrinho
+                            </Text>
+                            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#404040" }}>
+                                R$ 100.000, 00
+                            </Text>
+                        </View>
+                        <RedButtonComponent
+                            onPress={() => { navigation.navigate("FinalizarCompraScreen") }}
+                            label={"finalizar compra"} />
                     </View>
                 </View>
             </View>
@@ -259,61 +289,71 @@ const dadosFakes = [
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 1
+        codigo: 1,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 2
+        codigo: 2,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 3
+        codigo: 3,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 4
+        codigo: 4,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 5
+        codigo: 5,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 6
+        codigo: 6,
+        valor: 25.99
     },
 
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 7
+        codigo: 7,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 8
+        codigo: 8,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 9
+        codigo: 9,
+        valor: 25.99
     },
     {
         titulo: "Samsung Galaxy Final",
         subtitulo: "A10s 32GB Dual Chip Android 9.0 Tela 6.2” Octa-Core 4G Câmera 13MP+2MP - Azul",
         imagem: "https://images-americanas.b2w.io/produtos/01/00/img/1265954/6/1265954678_1GG.jpg",
-        codigo: 10
+        codigo: 10,
+        valor: 25.99
     }
 ]

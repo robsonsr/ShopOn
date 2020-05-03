@@ -64,8 +64,16 @@ const screenOptions = ({ route, navigation }) => {
                     {backIcon}
                 </View>
             )
+        },
+        headerTitleStyle: {
+            width: 180,
+            fontSize: 18
+
         }
-        // headerTitle: false,
+        // headerTitle: (title) => {
+        //     console.log("ffff", title)
+        //     return <Text>Robson</Text>
+        // },
         // headerLeft: (props) => {
         //     console.log("aaa", navigation)
         //     return (

@@ -107,7 +107,9 @@ const FinalizarCompraScreen = ({ navigation }) => {
                     alignItems: "center"
                 }}>
                 <RedButtonComponent
-                    onPress={() => { navigation.navigate("FinalizarCompraScreen") }}
+                    onPress={() => {
+                        navigation.navigate("AgendarRetiradaScreen")
+                    }}
                     label={"confirmar compra"} />
             </View>
         </>

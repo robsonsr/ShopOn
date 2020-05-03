@@ -13,6 +13,7 @@ import ProductDetails from '../screens/ProductDetails'
 import CarrinhoScreen from '../screens/CarrinhoScreen'
 import ConsultaProdutoScreen from '../screens/ConsultaProdutoScreen'
 import FinalizarCompraScreen from '../screens/FinalizarCompraScreen'
+import AgendarRetiradaScreen from '../screens/AgendarRetiradaScreen'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -96,7 +97,13 @@ const AppStack = ({ navigation }) => {
           headerTitle: "finalizar compra",
           headerRight: false
         }} />
-
+      <Stack.Screen
+        name="AgendarRetiradaScreen"
+        component={AgendarRetiradaScreen}
+        options={{
+          headerTitle: "agendar retirada",
+          headerRight: false
+        }} />
     </Stack.Navigator>
   );
 };

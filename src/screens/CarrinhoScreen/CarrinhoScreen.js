@@ -29,25 +29,6 @@ const barCodeIcon = <MaterialCommunityIcons
     size={25}
     color={"#fff"}
 />
-const qrCode = <FontAwesomeIcons
-    name="qrcode"
-    size={50}
-    color={"#F51E1E"}
-/>
-
-const shoppingcart = <AntDesign
-    name="shoppingcart"
-    size={50}
-    color={"#F51E1E"}
-/>
-
-const historic = <Ionicons
-    name="md-paper"
-    size={50}
-    color={"#F51E1E"}
-/>
-
-
 
 const CarrinhoScreen = ({ navigation }) => {
     const [showScanner, setShowScanner] = useState(false)
@@ -56,9 +37,16 @@ const CarrinhoScreen = ({ navigation }) => {
         setShowScanner(true);
     }
 
+    const onCodeDetected = (barCode) => {
+        navigation.navigate("ConsultaProdutoScreen")
+    }
     return (
         <>
-            <ReaderBarCode showCamera={showScanner} closeCamera={() => { setShowScanner(false); }} />
+            <ReaderBarCode
+                showCamera={showScanner}
+                onCodeDetected={onCodeDetected}
+                closeCamera={() => { setShowScanner(false); }}
+            />
             <View
                 style={{
                     backgroundColor: "#F4F4F4"
@@ -93,38 +81,60 @@ const CarrinhoScreen = ({ navigation }) => {
                         renderItem={({ item, index }) => (
                             <View
                                 style={{
-                                    flexDirection: "row",
+                                    flexDirection: "column",
                                     backgroundColor: "#fff",
                                     marginBottom: (index === dadosFakes.length - 1) ? 90 : 10,
                                     padding: 10,
                                     alignItems: "center",
                                 }}>
-                                <View
-                                    style={{
-                                        height: 50,
-                                        width: 50
-                                    }}>
-                                    <Image
+                                <View style={{
+                                    flexDirection: "row",
+                                }}>
+                                    <View
                                         style={{
                                             height: 50,
                                             width: 50
-                                        }}
-                                        source={{
-                                            uri: item.imagem
-                                        }}
-                                    />
+                                        }}>
+                                        <Image
+                                            style={{
+                                                height: 50,
+                                                width: 50
+                                            }}
+                                            source={{
+                                                uri: item.imagem
+                                            }}
+                                        />
+                                    </View>
+                                    <View
+                                        style={{
+                                            paddingHorizontal: 10,
+                                            flex: 1
+                                        }}>
+                                        <Text
+                                            style={{
+                                                fontSize: 14,
+                                                color: "#404040",
+                                                fontWeight: "bold"
+                                            }}
+                                        >{item.titulo}</Text>
+                                        <Text style={{
+                                            fontSize: 12,
+                                            textAlign: "justify",
+                                            color: "#404040",
+                                            // fontWeight: "bold"
+                                        }}>{item.subtitulo}</Text>
+                                    </View>
                                 </View>
                                 <View
                                     style={{
-                                        paddingHorizontal: 10,
-                                        flex: 1
+                                        height: 30,
+                                        // backgroundColor: "blue",
+                                        width: "100%",
+                                        marginTop: 10,
+                                        paddingVertical: 10
                                     }}>
-                                    <Text>{item.titulo}</Text>
-                                    <Text style={{
-                                        textAlign: "justify"
-                                    }}>{item.subtitulo}</Text>
+                                    <Text>Oiii</Text>
                                 </View>
-
                             </View>
                         )}
                     />
@@ -185,6 +195,8 @@ const ButtonAddProduct = ({ onPress }) => {
         </TouchableOpacity>
     )
 }
+
+
 
 
 const dadosFakes = [

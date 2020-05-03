@@ -11,6 +11,8 @@ import ProductDetails from '../screens/ProductDetails'
 
 // TELAS LISTA DE COMPRAS
 import CarrinhoScreen from '../screens/CarrinhoScreen'
+import ConsultaProdutoScreen from '../screens/ConsultaProdutoScreen'
+
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -78,6 +80,13 @@ const AppStack = ({ navigation }) => {
         component={CarrinhoScreen}
         options={{
           headerTitle: "carrinho",
+          headerRight: false
+        }} />
+      <Stack.Screen
+        name="ConsultaProdutoScreen"
+        component={ConsultaProdutoScreen}
+        options={{
+          headerTitle: "produto",
           headerRight: false
         }} />
 

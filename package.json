@@ -14,6 +14,7 @@
     "@react-navigation/drawer": "^5.5.1",
     "@react-navigation/native": "^5.1.7",
     "@react-navigation/stack": "^5.2.14",
+    "accordion-collapse-react-native": "^0.2.10",
     "react": "16.11.0",
     "react-devtools": "^4.6.0",
     "react-native": "0.62.2",

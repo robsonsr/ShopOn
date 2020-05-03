@@ -4,16 +4,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import ProductDetails from '../screens/ProductDetails';
 
-import defaultScreenOptions from './defaultScreenOptions'
+import defaultScreenOptions from './defaultScreenOptions';
 
 const Stack = createStackNavigator();
 const ProductDetailsStack = ({ navigation }) => {
   return (
-    <Stack.Navigator
-      screenOptions={defaultScreenOptions}
-    >
+    <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen
-        name="ProductDetails" component={ProductDetails}
+        name="ProductDetails"
+        component={ProductDetails}
         options={{ title: 'detalhes produto' }}
       />
       {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />

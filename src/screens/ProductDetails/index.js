@@ -81,13 +81,12 @@ const ProductDetails = ({ route }) => {
         url = '';
     }
 
-    const lastIndex = realm.objects('Historical').max('id')
-
+    const lastIndex = realm.objects('Historical').max('id');
     productsByCategory.length && !route.params?.category && realm.write(() => {
       realm.create(
         'Historical',
         {
-          id: lastIndex + 1,
+          id: lastIndex ? lastIndex + 1 : 1,
           category: code,
           url: url,
           title: 'Receita Pave de chocolate',

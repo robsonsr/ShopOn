@@ -15,8 +15,6 @@ const ProductDetailsStack = ({ navigation }) => {
         component={ProductDetails}
         options={{ title: 'detalhes produto' }}
       />
-      {/* <Stack.Screen name="QRcodeScreen" component={OTHERSCREEN} />
-        <Stack.Screen name="QRcodeScreen" component={OTHERSCREN} /> */}
     </Stack.Navigator>
   );
 };

@@ -38,7 +38,7 @@ import {
 } from './styles';
 
 const ProductDetails = () => {
-  const [code, setCode] = useState('smarttv');
+  const [code, setCode] = useState('');
   const [recipe, setRecipe] = useState([
     '1- bata o leite condensado no liquidificador até ficar bem cremoso ',
     '2 - derreta duas barras de chocolate meio amargo com meia caixinha de creme de leite no micro ondas, de 30 em 30 segundo, mexendo bem',
@@ -257,9 +257,9 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    addDatabaseProducts();
-    recoverProductDetails();
-  }, []);
+    // addDatabaseProducts();
+    code !== '' && recoverProductDetails();
+  }, [code]);
 
   return code.length > 0 ? (
     <Container>

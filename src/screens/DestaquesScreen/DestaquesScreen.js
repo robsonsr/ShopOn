@@ -39,7 +39,7 @@ const DestaquesScreen = ({ navigation }) => {
                     imageSource={shopon}
                     height={40}
                     width={40}
-                    label={"aproveite a loja"} />
+                    label={"aproveite a loja física"} />
                 <DestaqueButton
                     imageSource={compre_receba_hoje}
                     label={"compre e receba hoje"} />

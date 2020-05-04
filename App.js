@@ -28,6 +28,12 @@ import ProductDetails from './src/stacks/ProductDetails';
 import InformationQRCodeStack from './src/stacks/InformationQRCodeStack';
 import CustomDrawerContent from './src/stacks/CustomDrawerContent';
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import Reducers from './src/redux/Reducers'
+
+const store = createStore(Reducers)
+
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -40,7 +46,7 @@ const App = () => {
         {
           id: 5,
           name: 'Chocolate hersheys 92g-ta m-amargo',
-          description: '',
+          description: 'Chocolate',
           code: '0001',
           category: 'comida',
           image_url:
@@ -49,7 +55,8 @@ const App = () => {
           technical_information: '',
           starts: 4,
           votes: 42,
-          code_bars: 'hello',
+          code_bars: '7899970400070',
+          cashback: 2
         },
         'modified',
       );
@@ -67,7 +74,8 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '50983214',
+          cashback: 2
         },
         'modified',
       );
@@ -85,7 +93,8 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '58680797',
+          cashback: 2
         },
         'modified',
       );
@@ -103,7 +112,8 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '6889657',
+          cashback: 2
         },
         'modified',
       );
@@ -121,7 +131,8 @@ const App = () => {
           technical_information: '',
           starts: 3,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '143873191',
+          cashback: 2
         },
         'modified',
       );
@@ -143,7 +154,8 @@ const App = () => {
             'Código	29622355,Código de barras	7898647351509,Peso	0.25,Marca	Paulo Cezar Enxovais,Fabricante	Paulo Cezar Enxovais,Specifications	Microfibra/Paulo Cezar Enxovais',
           starts: 3,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '7898647351509',
+          cashback: 2
         },
         'modified',
       );
@@ -163,7 +175,8 @@ const App = () => {
             'Código	1617543822,Cor	Cinza claro,Tamanho	Casal,Peso	1.2',
           starts: 4,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '1617543822',
+          cashback: 2
         },
         'modified',
       );
@@ -183,7 +196,8 @@ const App = () => {
             'Código	104003172,Código de barras	7899825503055,Ambientes recomendados	Quarto e Escritório,Voltagem	Bivolt,Cor	Laranja,Potência	4W,Material	Plástico,Marca	AVANT,Peso	0.32',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '7899825503055',
+          cashback: 2
         },
         'modified',
       );
@@ -205,7 +219,8 @@ const App = () => {
             'Código	134415789, Código de barras	0711719528180, Wireless (Conexão s/ fio)	sim, Tensão/Voltagem	Bivolt, Garantia 	1 ano, Marca	Sony, Plataforma	PlayStation 4, HD	1TB, Conexões	1 HDMI',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '0711719528180',
+          cashback: 2
         },
         'modified',
       );
@@ -224,7 +239,8 @@ const App = () => {
             'Código	133746746, Código de barras	0711719520641, Conexões	1 PORTA MICRO USB, Voltagem 2	5V, Funcionalidade	NÃO SE APLICA, Dimensões aproximadas da embalagem (cm) - AxLxP	18.41 X 17.14 X 6.35, Peso Aproximado da Embalagem do produto (kg)	0.335, Plataforma	PlayStation 4, Conteúdo da Embalagem	1 Controle sem fio DUALSHOCK 4 1 Manual de instruções, Garantia do Fornecedor	3 Meses, Dimensões do produto - cm (AxLxP)	18.41 X 17.14 X 6.35, Material/Composição	POLIETILENO, Referência do Modelo	CUH-ZCT2U, SAC do Fabricante	0800-888-7669, Fabricante	SONY, Peso liq. do produto (Kg)	0.335,',
           starts: 5,
           votes: 52,
-          code_bars: 'hello',
+          code_bars: '0711719520641',
+          cashback: 2
         },
         'modified',
       );
@@ -235,24 +251,28 @@ const App = () => {
   return (
     <>
       <StatusBar backgroundColor="#A71414" />
-      <NavigationContainer>
-        <Drawer.Navigator
-          // drawerContentOptions={{
-          //   itemStyle: {
-          //     marginVertical: 10
-          //   }
-          // }}
-          initialRouteName="DestaquesStack"
-          drawerContent={(props) => <CustomDrawerContent {...props} />}
-          openByDefault={false}
-        >
-          <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />
-          <Drawer.Screen
-            name="ProductDetailsStack"
-            component={ProductDetails}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+
+
+        <NavigationContainer >
+          <Drawer.Navigator
+            // drawerContentOptions={{
+            //   itemStyle: {
+            //     marginVertical: 10
+            //   }
+            // }}
+            initialRouteName="DestaquesStack"
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+            openByDefault={false}
+          >
+            <Drawer.Screen name="DestaquesStack" component={DestaquesStack} />
+            <Drawer.Screen
+              name="ProductDetailsStack"
+              component={ProductDetails}
+            />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 };

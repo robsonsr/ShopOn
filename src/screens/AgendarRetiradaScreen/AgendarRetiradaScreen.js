@@ -2,6 +2,8 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
     View,
     Text,
@@ -40,43 +42,23 @@ const arrowRight = <Ionicons
 
 
 const AgendarRetiradaScreen = ({ navigation }) => {
-    const [quemRetira, setQueRetira] = useState(0)
-    const [retirarMaisTarde, setRetirarMaisTarde] = useState(false)
 
-    const [itensComprados, setItensComprados] = useState([
-        {
-            imagem: require("../../assets/img/testes/cortador_legume.png"),
-            titulo: "Test1",
-            descricao: "descrição1",
-            codigo: 0
-        },
-        {
-            imagem: require("../../assets/img/testes/cortador_legume.png"),
-            titulo: "Test2",
-            descricao: "descrição2",
-            codigo: 1
-        },
-        {
-            imagem: require("../../assets/img/testes/cortador_legume.png"),
-            titulo: "Test3",
-            descricao: "descrição2",
-            codigo: 2
-        },
-        {
-            imagem: require("../../assets/img/testes/cortador_legume.png"),
-            titulo: "Test4",
-            descricao: "descrição2",
-            codigo: 3
-        }
-    ])
+    const dispatch = useDispatch();
+    const listaCompraReducer = useSelector(({ ListaCompraReducer }) => ListaCompraReducer)
+
+    const [quemRetira, setQueRetira] = useState(0)
+
+    const [itensComprados, setItensComprados] = useState([])
 
     const [itensSelecionados, setItensSelecionados] = useState([])
+
+    const [horarioSelecionado, setHorarioSelecionado] = useState(0)
 
     const setItemSelecionado = (item) => {
         const newItensSelecionado = itensSelecionados;
         newItensSelecionado.push(item)
         setItensSelecionados(newItensSelecionado)
-        const newItensComprados = itensComprados.filter(({ codigo }) => item.codigo != codigo);
+        const newItensComprados = itensComprados.filter(({ id }) => item.id != id);
         setItensComprados(newItensComprados)
     }
 
@@ -84,13 +66,25 @@ const AgendarRetiradaScreen = ({ navigation }) => {
         const newItensComprados = itensComprados;
         newItensComprados.push(item)
         setItensComprados(newItensComprados)
-        const newItensSelecionados = itensSelecionados.filter(({ codigo }) => item.codigo != codigo);
+        const newItensSelecionados = itensSelecionados.filter(({ id }) => item.id != id);
         setItensSelecionados(newItensSelecionados)
+    }
+
+    const separarListaProdutos = () => {
+        setItensComprados(listaCompraReducer.produtos);
     }
 
     useEffect(() => {
         // setLista(dadosFakes);
     }, [])
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            separarListaProdutos()
+        });
+        return unsubscribe;
+    }, [navigation])
 
     return (
         <>
@@ -166,19 +160,26 @@ const AgendarRetiradaScreen = ({ navigation }) => {
                             activeColor={"red"}
                             data={[
                                 {
-                                    label: '30 min'
+                                    label: '30 min',
+                                    key: 0,
+                                    ms: 1800000
                                 },
                                 {
-                                    label: '1 hora'
+                                    label: '1 hora',
+                                    key: 1,
+                                    ms: 3600000
                                 },
                                 {
-                                    label: '2 horas'
+                                    label: '2 horas',
+                                    key: 2,
+                                    ms: 7200000
                                 },
                                 {
-                                    label: 'outro horário'
+                                    label: 'outro horário',
+                                    key: 3
                                 }
                             ]}
-                            selectedBtn={(e) => console.log(e)}
+                            selectedBtn={(e) => setHorarioSelecionado(e.ms)}
                         />
                     </ScrollView>
                 </View>
@@ -206,7 +207,7 @@ const AgendarRetiradaScreen = ({ navigation }) => {
                     alignItems: "center"
                 }}>
                 <RedButtonComponent
-                    onPress={() => { navigation.navigate("FinalizarCompra") }}
+                    onPress={() => { navigation.navigate("FinalizarCompra", { horarioSelecionado }) }}
                     label={"agendar retirada"} />
             </View>
         </>
@@ -220,9 +221,11 @@ const TabList = ({ listaEsquerda, listaDireita, cliqueItemEsquerda, cliqueItemDi
     const renderListaEsquerda = () => (
         listaEsquerda.map((item) => (
             <ItemLine
-                source={item.imagem}
-                titulo={item.titulo}
-                descricao={item.descricao}
+                source={{
+                    uri: item.image_url
+                }}
+                titulo={item.name}
+                descricao={item.description}
                 onPress={() => cliqueItemEsquerda(item)}
             />
         ))
@@ -230,9 +233,11 @@ const TabList = ({ listaEsquerda, listaDireita, cliqueItemEsquerda, cliqueItemDi
     const renderListaDireita = () => (
         listaDireita.map((item) => (
             <ItemLine
-                source={item.imagem}
-                titulo={item.titulo}
-                descricao={item.descricao}
+                source={{
+                    uri: item.image_url
+                }}
+                titulo={item.name}
+                descricao={item.description}
                 onPress={() => cliqueItemDireita(item)}
                 leftIcon
             />

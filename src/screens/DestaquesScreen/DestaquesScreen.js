@@ -16,7 +16,7 @@ const dia_maes = require("../../assets/img/destaques/dia_maes.png")
 const dia_maes_anuncio = require("../../assets/img/destaques/dia_maes_anuncio.png")
 
 const covid = require("../../assets/img/destaques/covid.png")
-
+const shopon = require("../../assets/img/shopon.png")
 
 
 const DestaquesScreen = ({ navigation }) => {
@@ -36,8 +36,10 @@ const DestaquesScreen = ({ navigation }) => {
             >
                 <DestaqueButton
                     onPress={() => navigate("ModoLojaHomeScreen")}
-                    imageSource={""}
-                    label={"shop on"} />
+                    imageSource={shopon}
+                    height={40}
+                    width={40}
+                    label={"aproveite a loja"} />
                 <DestaqueButton
                     imageSource={compre_receba_hoje}
                     label={"compre e receba hoje"} />
@@ -90,7 +92,7 @@ const DestaquesScreen = ({ navigation }) => {
 };
 export default DestaquesScreen;
 
-const DestaqueButton = ({ imageSource, label, onPress }) => {
+const DestaqueButton = ({ imageSource, label, onPress, height, width }) => {
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -111,8 +113,8 @@ const DestaqueButton = ({ imageSource, label, onPress }) => {
                 <Image
                     source={imageSource}
                     style={{
-                        height: 70,
-                        width: 70
+                        height: height ? height : 70,
+                        width: width ? width : 70
                     }}
                 />
             </View>

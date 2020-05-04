@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import {
     View,
     Text,
@@ -19,10 +20,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ReaderBarCode from '../../components/ReaderBarCode'
 
+import getRealm from '../../services/realm'
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 import RedButtonComponent from '../../components/RedButtonComponent'
+
+import ListaCompraActions from '../../redux/Actions/ListaCompraActions'
 
 const barCodeIcon = <MaterialCommunityIcons
     name="barcode-scan"
@@ -37,25 +42,44 @@ const chevronDown = <MaterialCommunityIcons
 />
 
 const CarrinhoScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+    const listaCompraReducer = useSelector(({ ListaCompraReducer }) => ListaCompraReducer)
+    console.log("Lista", listaCompraReducer)
+
     const [showScanner, setShowScanner] = useState(false)
-    const [lista, setLista] = useState([]);
+
+
     const openCodeScanner = () => {
         setShowScanner(true);
     }
 
-    const onCodeDetected = (barCode) => {
-        navigation.navigate("ConsultaProdutoScreen")
+    const onCodeDetected = (value) => {
+        navigation.navigate("ConsultaProdutoScreen", { barCode: value })
     }
 
     const removerItem = (item) => {
-        const newLista = lista.filter(({ codigo }) => {
-            return item.codigo != codigo;
-        })
-        setLista(newLista);
+        dispatch(ListaCompraActions.removerProdutoLista(item))
     }
 
+    const getValueTotal = () => {
+        let valorTotal = 0;
+        if (listaCompraReducer.produtos.length) {
+            listaCompraReducer.produtos.forEach(produto => {
+                valorTotal += produto.price;
+            });
+        }
+        return valorTotal;
+    }
+
+    const finalizarCompra = () => {
+        dispatch(ListaCompraActions.setValueTotal(getValueTotal()))
+        navigation.navigate("FinalizarCompraScreen")
+    }
     useEffect(() => {
-        setLista(dadosFakes);
+        if (listaCompraReducer.produtos.length === 0) {
+            openCodeScanner();
+        }
     }, [])
 
     return (
@@ -95,13 +119,13 @@ const CarrinhoScreen = ({ navigation }) => {
                     // paddingBottom: 60
                 }}>
                     <FlatList
-                        data={lista}
+                        data={listaCompraReducer.produtos}
                         renderItem={({ item, index }) => (
                             <View
                                 style={{
                                     flexDirection: "column",
                                     backgroundColor: "#fff",
-                                    marginBottom: (index === lista.length - 1) ? 103 : 10,
+                                    marginBottom: (index === listaCompraReducer.produtos.length - 1) ? 103 : 10,
                                     padding: 10,
                                     // paddingBottom: (index === lista.length - 1) ? 90 : 10,
                                     alignItems: "center",
@@ -120,7 +144,7 @@ const CarrinhoScreen = ({ navigation }) => {
                                                 width: 50
                                             }}
                                             source={{
-                                                uri: item.imagem
+                                                uri: item.image_url
                                             }}
                                         />
                                     </View>
@@ -135,13 +159,13 @@ const CarrinhoScreen = ({ navigation }) => {
                                                 color: "#404040",
                                                 fontWeight: "bold"
                                             }}
-                                        >{item.titulo}</Text>
+                                        >{item.name}</Text>
                                         <Text style={{
                                             fontSize: 12,
                                             textAlign: "justify",
                                             color: "#404040",
                                             // fontWeight: "bold"
-                                        }}>{item.subtitulo}</Text>
+                                        }}>{item.description}</Text>
                                     </View>
                                     <View
                                         style={{
@@ -153,7 +177,7 @@ const CarrinhoScreen = ({ navigation }) => {
                                             style={{
                                                 fontSize: 14,
                                                 color: "#404040"
-                                            }}>R$ {item.valor}</Text>
+                                            }}>R$ {item.price?.toFixed(2)}</Text>
                                     </View>
                                 </View>
                                 <View
@@ -184,7 +208,6 @@ const CarrinhoScreen = ({ navigation }) => {
                                     </View>
                                     <TouchableOpacity
                                         onPress={() => {
-
                                             removerItem(item)
                                         }}
                                         style={{
@@ -231,11 +254,11 @@ const CarrinhoScreen = ({ navigation }) => {
                                 total do carrinho
                             </Text>
                             <Text style={{ fontSize: 18, fontWeight: "bold", color: "#404040" }}>
-                                R$ 100.000, 00
+                                {getValueTotal().toFixed(2)}
                             </Text>
                         </View>
                         <RedButtonComponent
-                            onPress={() => { navigation.navigate("FinalizarCompraScreen") }}
+                            onPress={() => { finalizarCompra() }}
                             label={"finalizar compra"} />
                     </View>
                 </View>

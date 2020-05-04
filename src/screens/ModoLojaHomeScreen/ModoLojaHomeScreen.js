@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,7 +25,11 @@ const ModoLojaHomeScreen = ({ navigation }) => {
           backgroundColor: '#F4F4F4',
         }}>
         <ScrollView style={{ padding: 10 }}>
-          <View style={[styles.bannerAnuncioRetangular]} />
+          <View style={[styles.bannerAnuncioRetangular]} >
+            <Image
+              source={require("../../assets/img/banner.png")}
+            />
+          </View>
           <View style={[styles.containerMenu]}>
             <Button
               onPress={() => navigate('ProductDetails')}

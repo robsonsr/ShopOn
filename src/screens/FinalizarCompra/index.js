@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Barcode from 'react-native-barcode-builder';
 import getRealm from '../../services/realm';
@@ -21,11 +22,29 @@ import {
   ButtonFinishText,
 } from './styles';
 
-const FinalizarCompra = () => {
-  const details = { number: 5165165163 };
-  const [showDetails, setShowDetails] = useState(true);
+const FinalizarCompra = ({ route, navigation }) => {
+  const details = {
+    number: new Date().getTime(),
+    date: `${new Date().getUTCDate()}/${new Date().getUTCMonth()}/${new Date().getUTCFullYear()}`
+  };
 
+
+  const listaCompraReducer = useSelector(({ ListaCompraReducer }) => ListaCompraReducer)
+  console.log("route", route.params)
+  const [showDetails, setShowDetails] = useState(true);
+  const [horario, setHorario] = useState("")
+  const [date, setDate] = useState("");
+  const getHorario = () => {
+    if (route.params) {
+      console.log("ll", route.params.horarioSelecionado)
+      let ms = new Date().getTime() + route.params.horarioSelecionado;
+      const date = new Date(ms)
+      setHorario(`${date.getHours()}:${date.getMinutes()}`)
+      setDate(`${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`)
+    }
+  }
   useEffect(() => {
+    getHorario();
     const loadProducts = async () => {
       const realm = await getRealm();
     };
@@ -47,8 +66,8 @@ const FinalizarCompra = () => {
         </PaymentMethodText>
         <Line />
         <Row>
-          <CardDetails>10 produtos</CardDetails>
-          <CardDetails>R$ 230.06</CardDetails>
+          <CardDetails>{listaCompraReducer.produtos.length} produtos</CardDetails>
+          <CardDetails>R$ {listaCompraReducer.valorTotal?.toFixed(2)}</CardDetails>
         </Row>
         <Row>
           <CardDetails>desconto</CardDetails>
@@ -56,7 +75,7 @@ const FinalizarCompra = () => {
         </Row>
         <Row style={{ marginTop: 5, fontSize: 16 }}>
           <CardDetails style={{ fontWeight: 'bold' }}>total</CardDetails>
-          <CardDetails style={{ fontWeight: 'bold' }}>R$ 208.00</CardDetails>
+          <CardDetails style={{ fontWeight: 'bold' }}>R$ {(listaCompraReducer.valorTotal - 22.06).toFixed(2)}</CardDetails>
         </Row>
       </ContainerDetails>
       <ContainerRetirada>
@@ -78,12 +97,14 @@ const FinalizarCompra = () => {
           </ContentText>
           <ContentText>Brenda de Almeida Gabriel</ContentText>
           <ContentText>999.999.999-09</ContentText>
-          <Row style={{ justifyContent: 'flex-start' }}>
-            <ContentText>Agendado para às </ContentText>
-            <ContentText style={{ fontWeight: 'bold' }}>14:30 </ContentText>
-            <ContentText>do dia </ContentText>
-            <ContentText style={{ fontWeight: 'bold' }}>22/02/2020</ContentText>
-          </Row>
+          {horario != '' &&
+            <Row style={{ justifyContent: 'flex-start' }}>
+              <ContentText>Agendado para às </ContentText>
+              <ContentText style={{ fontWeight: 'bold' }}>{horario} </ContentText>
+              <ContentText>do dia </ContentText>
+              <ContentText style={{ fontWeight: 'bold' }}>{date}</ContentText>
+            </Row>
+          }
         </Content>
       )}
       <CardTitle style={{ padding: 10 }}>mostre no caixa</CardTitle>
@@ -101,7 +122,9 @@ const FinalizarCompra = () => {
         / CNPJ: 00.776.574/006-60 / Inscrição Estadual: 492.513.778.117 /
         Endereço Rua Sacadura Cabral, 102 - Rio de Janeiro, RJ - 20081-902
       </TextFree>
-      <ButtonFinish>
+      <ButtonFinish
+        onPress={() => navigation.navigate("ModoLojaHomeScreen")}
+      >
         <ButtonFinishText>finalizar compra</ButtonFinishText>
       </ButtonFinish>
     </Container>

@@ -86,7 +86,7 @@ const CustomDrawerContent = (props) => {
         </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={[styles.itemMenu]}
                 onPress={() => {
                     navigation.navigate('ProductDetailsStack');
@@ -109,7 +109,7 @@ const CustomDrawerContent = (props) => {
                     ]}>
                     QrCode
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
                 style={[styles.itemMenu]}
@@ -183,7 +183,7 @@ const CustomDrawerContent = (props) => {
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={[styles.itemMenu]}
                 onPress={() => {
                     // navigation.navigate('ProductDetailsStack');
@@ -205,7 +205,7 @@ const CustomDrawerContent = (props) => {
                     ]}>
                     leitor de código de barras
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
                 style={[styles.itemMenu]}

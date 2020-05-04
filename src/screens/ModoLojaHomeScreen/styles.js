@@ -34,8 +34,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     bannerAnuncioRetangular: {
-        height: 90,
-        backgroundColor: "gray"
+        justifyContent: "center",
+        alignItems: "center"
+        // height: 90,
+        // backgroundColor: "gray"
     },
     bannerAnuncioQuadro: {
         width: windowWidth,

@@ -72,13 +72,10 @@ const ReaderBarCode = ({ showCamera, closeCamera, onCodeDetected }) => {
                         buttonNegative: 'Cancel',
                     }}
                     onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                        console.log(barcodes[0].type);
                         if (barcodes[0].type === "EAN_13" || barcodes[0].type === "EAN_8") {
-                            console.log("foi");
                             closeCamera();
-                            onCodeDetected(barcodes[0]);
+                            onCodeDetected(barcodes[0].data);
                         }
-
                     }}
                 />
                 <View

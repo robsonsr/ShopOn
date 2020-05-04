@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import {
     View,
     Text,
@@ -25,6 +26,10 @@ const imgSourceProduto = require("../../assets/img/testes/cortador_legume.png")
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import ListaCompraActions from '../../redux/Actions/ListaCompraActions'
+
+import getRealm from '../../services/realm'
+
 const chevronDown = <MaterialCommunityIcons
     name="chevron-down"
     size={16}
@@ -37,9 +42,50 @@ const chevronRight = <MaterialCommunityIcons
     color={"#666"}
 />
 
-const ConsultaProdutoScreen = ({ navigation }) => {
+const ConsultaProdutoScreen = ({ route, navigation }) => {
+
+    const dispatch = useDispatch();
+    const listaCompraReducer = useSelector(({ ListaCompraReducer }) => ListaCompraReducer)
+
     const [showDescricao, setShowDescricao] = useState(false)
     const [showInfoTecnicas, setInfoTecnicas] = useState(false)
+
+    const [produtoLido, setProdutoLido] = useState({})
+    const [outrosProdutos, setOutrosProdutos] = useState([])
+
+    const recoverProduct = async () => {
+        const { barCode } = route.params;
+
+        const realm = await getRealm();
+        const filter = `code_bars = '${barCode}'`;
+        console.log("filter", filter)
+        const product = realm.objects('Products').filtered(filter);
+        console.log("foi", product[0])
+        if (product[0]) {
+            setProdutoLido(product[0]);
+            const categoria = product[0].category
+            const filterCategoria = `category = '${categoria}'`;
+            console.log("filterCategoria", filterCategoria);
+            const outrosProdutos = realm.objects('Products').filtered(filterCategoria);
+            console.log("outros produto", outrosProdutos[0]);
+
+            if (outrosProdutos)
+                setOutrosProdutos(outrosProdutos)
+        }
+        console.log("produto", product[0]);
+    }
+
+    const addProduto = () => {
+        dispatch(ListaCompraActions.setProdutoLista(produtoLido))
+        navigation.navigate("CarrinhoScreen")
+    }
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            recoverProduct()
+        });
+        return unsubscribe;
+    }, [navigation])
     return (
         <>
 
@@ -55,48 +101,54 @@ const ConsultaProdutoScreen = ({ navigation }) => {
                     }}
                 >
                     <ProdutoPrincipal
-                        imgSource={imgSourceProduto}
-                        titulo={"Cortador Descascador de Vegetais em Espiral"}
+                        imgSource={{
+                            uri: produtoLido.image_url
+                        }}
+                        titulo={produtoLido?.name}
+                        stars={produtoLido?.starts}
+                        codigo={produtoLido?.code_bars}
+                        preco={produtoLido?.price?.toFixed(2)}
+                        desconto={produtoLido?.cashback ? produtoLido.cashback : 2}
                     />
                     <CollapseCustom
                         isCollapse={showDescricao}
                         title={"descrição"}
                         onToggle={(value) => setShowDescricao(value)}
-                        values={"descrição do produto"}
+                        values={produtoLido?.description}
 
                     />
                     <CollapseCustom
                         isCollapse={showInfoTecnicas}
                         title={"informações técnicas"}
                         onToggle={(value) => setInfoTecnicas(value)}
-                        values={"informações técnicas"}
+                        values={produtoLido.technical_information}
 
                     />
                     <ListaProdutosHorizontal
                         titulo={"os principais produtos da categoria"}
-                        produtos={produtosFake}
+                        produtos={outrosProdutos}
                     />
-                    <ListaProdutosHorizontal
+                    {/* <ListaProdutosHorizontal
                         titulo={"novidades para você"}
                         produtos={produtosFake}
-                    />
+                    /> */}
 
                 </ScrollView>
                 <View
                     style={{
                         // height: 70,
-                        // padding: 20,
+                        padding: 20,
                         paddingHorizontal: 20,
                         paddingBottom: 20,
                         width: "100%",
                         position: "absolute",
                         bottom: 0,
-                        // backgroundColor: "#fff",
+                        backgroundColor: "#fff",
                         justifyContent: "center",
                         alignItems: "center"
                     }}>
                     <RedButtonComponent onPress={() => {
-                        navigation.navigate("CarrinhoScreen")
+                        addProduto()
                     }} label={"adicionar ao carrinho"} />
                 </View>
             </View>
@@ -105,7 +157,7 @@ const ConsultaProdutoScreen = ({ navigation }) => {
 }
 export default ConsultaProdutoScreen;
 
-const ProdutoPrincipal = ({ imgSource, titulo, codigo }) => {
+const ProdutoPrincipal = ({ imgSource, titulo, codigo, stars, preco, desconto }) => {
     return (
         <View
             style={[
@@ -138,7 +190,7 @@ const ProdutoPrincipal = ({ imgSource, titulo, codigo }) => {
                 width: "100%",
                 alignItems: "flex-start"
             }}>
-                <AvaliacaoStars quantStars={2} />
+                <AvaliacaoStars quantStars={stars} />
                 <Text
                     style={{
                         fontSize: 12,
@@ -159,20 +211,20 @@ const ProdutoPrincipal = ({ imgSource, titulo, codigo }) => {
                         fontWeight: "bold",
                         color: "#404040",
                         marginVertical: 5
-                    }}>R$ 25,99</Text>
+                    }}>R$ {preco}</Text>
                 <Text>
                     em até 2x sem juros no
                     <Text style={{
                         fontWeight: "bold"
                     }}>  cartão de crédito com Ame </Text>
-                    e receba R$ 0,52
+                    e receba R$ {(desconto / 100 * preco).toFixed(2)}
                 </Text>
                 <Text
                     style={{
                         color: "#6FCF97",
                         fontWeight: "bold"
                     }}>
-                    (2% de volta)
+                    ({desconto}% de volta)
                 </Text>
             </View>
         </View>
@@ -184,8 +236,17 @@ const ListaProdutosHorizontal = ({ titulo, produtos }) => {
     // titulo: "Mini Processador HC31 - Black & Decker 220V",
     // preco: "19,14",
     // avaliacao: 2
+
+    // imgSource={{
+    //     uri: produtoLido.image_url
+    // }}
+    // titulo={produtoLido?.name}
+    // stars={produtoLido?.starts}
+    // codigo={produtoLido?.code_bars}
+    // preco={produtoLido?.price?.toFixed(2)}
+    // desconto={produtoLido?.cashback ? produtoLido.cashback : 2}
     const renderProdutos = () => {
-        return produtos.map((produto) =>
+        return produtos.map((produto, index) =>
             <TouchableOpacity
                 style={{
                     marginHorizontal: 5,
@@ -196,19 +257,21 @@ const ListaProdutosHorizontal = ({ titulo, produtos }) => {
                         height: 100,
                         width: 100
                     }}
-                    source={produto.image}
+                    source={{
+                        uri: produto.image_url
+                    }}
                 />
                 <Text
                     style={{
                         fontSize: 12,
                         color: "#666666",
                         marginTop: 5
-                    }}>{produto.titulo}</Text>
+                    }}>{produto.name}</Text>
                 <View
                     style={{
                         marginTop: 5
                     }}>
-                    <AvaliacaoStars quantStars={3} />
+                    <AvaliacaoStars quantStars={produto.starts} />
                 </View>
                 <Text
                     style={{
@@ -223,7 +286,7 @@ const ListaProdutosHorizontal = ({ titulo, produtos }) => {
                         color: "#666666",
                         marginTop: 5,
                         fontWeight: "bold"
-                    }}>R$19,14</Text>
+                    }}>R$ {produto.price.toFixed(2)}</Text>
 
             </TouchableOpacity>
         )

@@ -18,6 +18,9 @@ import HistoricoComprasDetalhe from '../screens/HistoricoComprasDetalhe';
 import HistoricoRetiradas from '../screens/HistoricoRetiradas';
 import FinalizarCompra from '../screens/FinalizarCompra';
 import FinalizarCompraScreen from '../screens/FinalizarCompraScreen'
+
+import ConsultaProdutoScreen from '../screens/ConsultaProdutoScreen'
+
 // TELAS LISTA DE COMPRAS
 import CarrinhoScreen from '../screens/CarrinhoScreen'
 import AgendarRetiradaScreen from '../screens/AgendarRetiradaScreen'
@@ -154,6 +157,16 @@ const AppStack = ({ navigation }) => {
           headerRight: false,
         }}
       />
+      <Stack.Screen
+        name="ConsultaProdutoScreen"
+        component={ConsultaProdutoScreen}
+        options={{
+          headerTitle: 'produto',
+          headerRight: false,
+        }}
+      />
+
+
     </Stack.Navigator>
   );
 };

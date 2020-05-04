@@ -2,6 +2,8 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
     View,
     Text,
@@ -19,10 +21,13 @@ const windowHeight = Dimensions.get('window').height;
 
 import { Switch } from 'react-native-switch';
 
-
 import RedButtonComponent from '../../components/RedButtonComponent'
 
 const FinalizarCompraScreen = ({ navigation }) => {
+    
+    const dispatch = useDispatch();
+    const listaCompraReducer = useSelector(({ ListaCompraReducer }) => ListaCompraReducer)
+    console.log("F", listaCompraReducer)
     const [formaPagmento, setFormaPagamento] = useState(0)
     const [retirarMaisTarde, setRetirarMaisTarde] = useState(false)
     useEffect(() => {
@@ -37,7 +42,10 @@ const FinalizarCompraScreen = ({ navigation }) => {
                 }}>
                 <View style={{ padding: 10 }}>
                     <Titulo label={"resumo do carrinho"} />
-                    <Resumo />
+                    <Resumo
+                        valoTotal={listaCompraReducer.valorTotal}
+                        quantidadeProdutos={listaCompraReducer.produtos.length}
+                    />
                 </View>
                 <View style={{ paddingHorizontal: 10 }}>
                     <Titulo label={"forma de pagamento"} />
@@ -108,7 +116,12 @@ const FinalizarCompraScreen = ({ navigation }) => {
                 }}>
                 <RedButtonComponent
                     onPress={() => {
-                        navigation.navigate("AgendarRetiradaScreen")
+                        if (retirarMaisTarde) {
+                            navigation.navigate("AgendarRetiradaScreen")
+                        }else{
+                            navigation.navigate("FinalizarCompra")
+                        }
+                        
                     }}
                     label={"confirmar compra"} />
             </View>
@@ -117,7 +130,7 @@ const FinalizarCompraScreen = ({ navigation }) => {
 }
 export default FinalizarCompraScreen;
 
-const Resumo = () => {
+const Resumo = ({ valoTotal, quantidadeProdutos }) => {
     return (
         <View style={{
             backgroundColor: "#fff",
@@ -130,8 +143,8 @@ const Resumo = () => {
                 flexDirection: "row",
                 justifyContent: "space-between"
             }}>
-                <Text style={{}}>10 produtos</Text>
-                <Text>R$ 100.000,00</Text>
+                <Text style={{}}>{quantidadeProdutos} produtos</Text>
+                <Text>R$ {valoTotal?.toFixed(2)}</Text>
             </View>
             <View style={{
                 flexDirection: "column",
@@ -143,18 +156,18 @@ const Resumo = () => {
                     textAlign: "right",
                     fontSize: 12,
                     paddingVertical: 2
-                }}>R$ 140,45 em até 12x ou</Text>
+                }}>R$ {valoTotal?.toFixed(2)} em até 12x ou</Text>
                 <Text style={{
                     textAlign: "right",
                     fontSize: 12,
                     paddingVertical: 2
-                }}>R$134,53 em 1x no cartão</Text>
+                }}>R$ {valoTotal?.toFixed(2)} em 1x no cartão</Text>
                 <Text style={{
                     textAlign: "right",
                     fontSize: 12,
                     color: "#47701A",
                     paddingVertical: 2
-                }}>R$ 134,53 em 1x no cartão americanas.com</Text>
+                }}>R$ {valoTotal?.toFixed(2)} em 1x no cartão americanas.com</Text>
                 <Text style={{
                     textAlign: "right",
                     fontSize: 12,

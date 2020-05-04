@@ -74,7 +74,7 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: '50983214',
+          code_bars: '7899970400094',
           cashback: 2
         },
         'modified',
@@ -93,7 +93,7 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: '58680797',
+          code_bars: '7898279790400',
           cashback: 2
         },
         'modified',
@@ -112,7 +112,7 @@ const App = () => {
           technical_information: '',
           starts: 5,
           votes: 52,
-          code_bars: '6889657',
+          code_bars: '7898279790400',
           cashback: 2
         },
         'modified',
@@ -131,7 +131,7 @@ const App = () => {
           technical_information: '',
           starts: 3,
           votes: 52,
-          code_bars: '143873191',
+          code_bars: '7898591452444',
           cashback: 2
         },
         'modified',

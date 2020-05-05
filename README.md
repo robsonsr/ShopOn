@@ -1,7 +1,10 @@
 REACT NATIVE
-QRCODE EXEMPLO
+</br>
+QRCODE EXEMPLO </br>
 ![](https://user-images.githubusercontent.com/9003593/81031398-89ea6300-8e62-11ea-8f71-8226b76489bd.jpeg)
-<img src="https://user-images.githubusercontent.com/9003593/81031398-89ea6300-8e62-11ea-8f71-8226b76489bd.jpeg"/>
+
+</br>
+</br>
 #Usando realm
 
 import getRealm from '../services/realm'

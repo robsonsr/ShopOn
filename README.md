@@ -1,6 +1,8 @@
-REACT NATIVE
+<h1>REACT NATIVE</h1>
 </br>
-CÓDIGOS DE BARRA DE EXEMPLO
+</br>
+<h3>CÓDIGOS DE BARRA DE EXEMPLO</h3>
+</br>
 </br>
 <img src="https://user-images.githubusercontent.com/9003593/81031803-e732e400-8e63-11ea-96f7-273d1d15e80c.jpeg" width="300" height="100" />
 </br>
@@ -17,7 +19,7 @@ CÓDIGOS DE BARRA DE EXEMPLO
 </br>
 </br>
 
-#QR CODE para teste
+<h3>QR CODE para teste</h3>
 
 <p>Setor Alimentos</p>
 <img src="https://github.com/robsonsr/shopmode/blob/master/setor_comida.png" width="200" height="200" />

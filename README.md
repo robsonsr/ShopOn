@@ -1,9 +1,6 @@
 <h1>REACT NATIVE</h1>
-</br>
-</br>
 <h3>CÓDIGOS DE BARRA DE EXEMPLO</h3>
-</br>
-</br>
+
 <img src="https://user-images.githubusercontent.com/9003593/81031803-e732e400-8e63-11ea-96f7-273d1d15e80c.jpeg" width="300" height="100" />
 </br>
 <img src="https://user-images.githubusercontent.com/9003593/81031806-e9953e00-8e63-11ea-8aff-4ba2a5cbcf2b.jpeg" width="300" height="100" />
